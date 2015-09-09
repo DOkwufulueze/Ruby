@@ -14,3 +14,4 @@ class Vehicle
     @price = price
   end
 end
+

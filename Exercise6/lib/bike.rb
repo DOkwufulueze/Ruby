@@ -12,3 +12,4 @@ class Bike < Vehicle
     "\n#{@price_flag == 1 ? 'Updated Contents': 'Contents'} of Bike\nName: #{@name}\n#{@price_flag == 1 ? 'New Price': 'Price'}: #{@price}\nDealer: #{@dealer}\n\n"
   end
 end
+
