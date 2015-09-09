@@ -5,7 +5,7 @@ class String
       |character| occurrences[character] += 1
     }
 
-    return occurrences
+    occurrences
   end
 
   def show_occurrences
