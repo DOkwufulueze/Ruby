@@ -1,29 +1,41 @@
 class Customer
   @@account_number = 1234567890
   @@customers = []
+  @@hash = {}
   def initialize(name)
     check_customer_existence(name)   
   end
 
   def check_customer_existence(name)
-    if (@@customers.include? name)
-      warn_of_duplication
+    if (@@customers.detect { |hash| hash[:name] == name })
+      warn_of_duplication(name)
     else
-      @@customers.push(name)
       @name = name
       @balance = 1000
       @@account_number += 1
+      @account_number = @@account_number
+      customer = {
+        :name => name,
+        :balance => @balance,
+        :account_number => @account_number
+      }
+      @@customers.push(customer)
+      @@hash = customer
       welcome_customer
     end    
   end
 
   def welcome_customer
     puts "Customer Details"
-    puts "Name: #{@name}"
-    puts "Account Number:#{@@account_number}"
-    puts "Balance: #{@balance}"
+    show_details
     puts "Enter 'w' to withdraw, d to deposit, q to quit transaction, c to close application"
     perform_transaction
+  end
+
+  def show_details
+    puts "Name: #{@name}"
+    puts "Account Number:#{@account_number}"
+    puts "Balance: #{@balance}"
   end
 
   def perform_transaction
@@ -46,6 +58,7 @@ class Customer
     puts "How much do you want to deposit?"
     how_much = gets.chomp.to_i
     @balance += how_much
+    @@hash[:balance] = @balance
     welcome_customer
   end
 
@@ -53,6 +66,7 @@ class Customer
     puts "How much do you want to withdraw?"
     how_much = gets.chomp.to_i
     @balance - how_much >= 0 ? @balance -= how_much : warn_of_insufficient_funds
+    @@hash[:balance] = @balance
     welcome_customer
   end
 
@@ -61,9 +75,18 @@ class Customer
     welcome_customer
   end
 
-  def warn_of_duplication
-    puts ":::Customer #{@name} already exists!!!"
+  def warn_of_duplication(name)
+    puts "\n:::Customer #{name} already exists!!! See Details Below\n"
+    @name = name
+    @@hash = @@customers.detect { |hash| hash[:name] == name }
+    reset_customer
+    show_details
     restart_banking
+  end
+
+  def reset_customer
+    @balance = @@hash[:balance]
+    @account_number = @@hash[:account_number]
   end
 
   def warn_of_invalid_transaction
