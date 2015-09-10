@@ -7,11 +7,7 @@ class Customer
   end
 
   def check_customer_existence(name)
-    if (@@customers.detect { |hash| hash[:name] == name })
-      warn_of_duplication(name)
-    else
-      register_new_customer(name)
-    end    
+    @@customers.detect { |hash| hash[:name] == name } ? warn_of_duplication(name) : register_new_customer(name)
   end
 
   def register_new_customer(name)
