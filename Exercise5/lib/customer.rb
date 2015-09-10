@@ -10,19 +10,23 @@ class Customer
     if (@@customers.detect { |hash| hash[:name] == name })
       warn_of_duplication(name)
     else
-      @name = name
-      @balance = 1000
-      @@account_number += 1
-      @account_number = @@account_number
-      customer = {
-        :name => name,
-        :balance => @balance,
-        :account_number => @account_number
-      }
-      @@customers.push(customer)
-      @@hash = customer
-      welcome_customer
+      register_new_customer(name)
     end    
+  end
+
+  def register_new_customer(name)
+    @name = name
+    @balance = 1000
+    @@account_number += 1
+    @account_number = @@account_number
+    @@hash = {
+      :name => name,
+      :balance => @balance,
+      :account_number => @account_number
+    }
+
+    @@customers.push(@@hash)
+    welcome_customer
   end
 
   def welcome_customer
