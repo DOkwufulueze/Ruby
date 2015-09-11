@@ -1,5 +1,5 @@
-require_relative('../lib/string.rb')
+require_relative('../lib/palindrome_tester.rb')
 
-puts 'Enter a text to test if it\'s a Palindrome '
-gets.chomp.check_if_palindrome
+tester = PalindromeTester.new
+tester.enter_input
 
