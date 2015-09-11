@@ -5,7 +5,7 @@ class PascalTriangleGenerator
   end
 
   def generate_pascal_triangle_for
-    if @input < 1
+    if @input <= 1
       warn
     else
       row_array = [1]
