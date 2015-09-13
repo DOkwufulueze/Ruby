@@ -4,7 +4,7 @@ class TimeAddition
   end
 
   def add_time(time_inputs_string)
-    time_inputs = time_inputs_string.split(/\s+|,+|\.+/)
+    time_inputs = time_inputs_string.split(/[\s,\.]+/)
     if (time_inputs.all? { |time| is_valid?(time) })
       modified_first = Time.parse(time_inputs[0])
       time_sum = time_inputs.map { |time| Time.parse(time) }.inject do |time_add, time|
