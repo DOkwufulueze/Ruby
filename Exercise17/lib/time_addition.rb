@@ -16,7 +16,10 @@ class TimeAddition
   end
 
   def output_result(time_sum, modified_first)
-    just_time = "#{time_sum.hour}:#{time_sum.min}:#{time_sum.sec}"
+    time_hour = time_sum.hour.to_s.length > 1 ? time_sum.hour : "0#{time_sum.hour.to_i}"
+    time_minute = time_sum.min.to_s.length > 1 ? time_sum.min : "0#{time_sum.min.to_i}"
+    time_second = time_sum.sec.to_s.length > 1 ? time_sum.sec : "0#{time_sum.sec.to_i}"
+    just_time = "#{time_hour}:#{time_minute}:#{time_second}"
     day = time_sum.day - modified_first.day
     if (day > 0)
       "#{day} #{day > 1 ? 'days' : 'day'} & #{just_time}"
