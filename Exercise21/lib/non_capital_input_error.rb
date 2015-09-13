@@ -1,0 +1,3 @@
+class NonCapitalInputError < StandardError
+end
+

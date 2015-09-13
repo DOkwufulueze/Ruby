@@ -1,0 +1,3 @@
+class BlankInputError < StandardError
+end
+
