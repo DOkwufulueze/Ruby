@@ -5,7 +5,7 @@ class String
     digit_range = 0..9
     hash = Hash.new(0)
 
-    self.each_char do |character|
+    each_char do |character|
       case (Integer(character) rescue character)
       when lower_range
         hash[:lowercase] += 1
