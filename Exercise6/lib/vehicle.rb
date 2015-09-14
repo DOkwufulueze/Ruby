@@ -5,7 +5,7 @@ class Vehicle
     @price_flag = 0
   end
 
-  def show_contents
+  def show_content
     "\n#{@price_flag == 1 ? 'Updated Contents': 'Contents'} of Vehicle\nName: #{@name}\n#{@price_flag == 1 ? 'New Price': 'Price'}: #{@price}\n\n"
   end
 

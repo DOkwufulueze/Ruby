@@ -8,8 +8,8 @@ class Bike < Vehicle
     @price_flag = 0 # Price hasn't been updated yet
   end
 
-  def show_contents()
-    "\n#{@price_flag == 1 ? 'Updated Contents': 'Contents'} of Bike\nName: #{@name}\n#{@price_flag == 1 ? 'New Price': 'Price'}: #{@price}\nDealer: #{@dealer}\n\n"
+  def show_content
+    "\n#{@price_flag == 1 ? 'Updated Content': 'Content'} of Bike\nName: #{@name}\n#{@price_flag == 1 ? 'New Price': 'Price'}: #{@price}\nDealer: #{@dealer}\n\n"
   end
 end
 
