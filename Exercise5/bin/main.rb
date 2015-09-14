@@ -1,7 +1,7 @@
 require_relative '../lib/customer.rb'
 
 customer = Customer.new("Okwufulueze Daniel")
-customer.show_details
+puts customer.show_details
 puts "Enter W to withdraw, D to deposit, V to View your Details, N to Open a new account, Q to quit"
 input = gets.chomp
 
@@ -15,7 +15,7 @@ when input.match(/w/i)
     puts ":::Invalid withdrawal amount. Please enter a number"
   else
     puts customer.validate_withdrawal(amount) ? "Withdrawal transaction completed" : ":::Insufficient Funds!"
-    customer.show_details
+    puts customer.show_details
   end
 
 when input.match(/d/i)
@@ -26,7 +26,7 @@ when input.match(/d/i)
     puts ":::Invalid deposit amount. Please enter a number"
   else
     customer.deposit(amount)
-    customer.show_details
+    puts customer.show_details
   end
 
 when input.match(/n/i)
@@ -34,7 +34,7 @@ when input.match(/n/i)
   puts "Your new Account Number is: #{customer.account_number}"
 
 when input.match(/v/i)
-  customer.show_details
+  puts customer.show_details
 
 when input.match(/q/i)
   customer.end_banking

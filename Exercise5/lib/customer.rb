@@ -24,10 +24,7 @@ class Customer
   end
 
   def show_details
-    puts "Account Details:"
-    puts "Name: #{@name}"
-    puts "Account Number:#{account_number}"
-    puts "Balance: #{balance}"
+    "Account Details:\n\nName: #{@name}\nAccount Number:#{account_number}\nBalance: #{balance}"
   end
 
   def warn_of_insufficient_funds
