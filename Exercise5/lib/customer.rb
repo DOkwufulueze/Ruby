@@ -1,102 +1,41 @@
 class Customer
-  @@account_number = 1234567890
-  @@customers = []
-  @@hash = {}
-  def initialize(name)
-    check_customer_existence(name)   
-  end
-
-  def check_customer_existence(name)
-    @@customers.detect { |hash| hash[:name] == name } ? warn_of_duplication(name) : register_new_customer(name)
-  end
-
-  def register_new_customer(name)
+  attr_accessor :account_number, :balance
+  def initialize(name) 
     @name = name
-    @balance = 1000
-    @@account_number += 1
-    @account_number = @@account_number
-    @@hash = {
-      :name => name,
-      :balance => @balance,
-      :account_number => @account_number
-    }
-
-    @@customers.push(@@hash)
-    welcome_customer
+    @account_number = 1234567890
+    @balance = 1000.0
   end
 
-  def welcome_customer
-    puts "Customer Details"
-    show_details
-    puts "Enter 'w' to withdraw, d to deposit, q to quit transaction, c to close application"
-    perform_transaction
+  def assign_new_account_number
+    @account_number += 1
+  end
+
+  def deposit(how_much)
+    @balance += how_much
+  end
+
+  def validate_withdrawal(how_much)
+    @balance >= how_much ? withdraw(how_much) : warn_of_insufficient_funds
+  end
+
+  def withdraw(how_much)
+    @balance -= how_much
+    true
   end
 
   def show_details
+    puts "Account Details:"
     puts "Name: #{@name}"
-    puts "Account Number:#{@account_number}"
-    puts "Balance: #{@balance}"
-  end
-
-  def perform_transaction
-    input = gets.chomp
-    case
-    when input.match(/w/i)
-      withdraw
-    when input.match(/d/i)
-      deposit
-    when input.match(/q/i)
-      restart_banking
-    when input.match(/c/i)
-      end_banking
-    else
-      warn_of_invalid_transaction
-    end
-  end
-
-  def deposit
-    puts "How much do you want to deposit?"
-    how_much = gets.chomp.to_i
-    @balance += how_much
-    @@hash[:balance] = @balance
-    welcome_customer
-  end
-
-  def withdraw
-    puts "How much do you want to withdraw?"
-    how_much = gets.chomp.to_i
-    @balance - how_much >= 0 ? @balance -= how_much : warn_of_insufficient_funds
-    @@hash[:balance] = @balance
-    welcome_customer
+    puts "Account Number:#{account_number}"
+    puts "Balance: #{balance}"
   end
 
   def warn_of_insufficient_funds
-    puts ":::Insufficient Funds!!!"
-    welcome_customer
-  end
-
-  def warn_of_duplication(name)
-    puts "\n:::Customer #{name} already exists!!! See Details Below\n"
-    @name = name
-    @@hash = @@customers.detect { |hash| hash[:name] == name }
-    reset_customer
-    show_details
-    restart_banking
-  end
-
-  def reset_customer
-    @balance = @@hash[:balance]
-    @account_number = @@hash[:account_number]
+    false
   end
 
   def warn_of_invalid_transaction
-    puts ":::Invalid Transaction!!!" 
-    welcome_customer
-  end
-
-  def restart_banking
-    puts "Enter new Customer name"
-    Customer.new(gets.chomp)
+    abort ":::Invalid Transaction!!!" 
   end
 
   def end_banking
