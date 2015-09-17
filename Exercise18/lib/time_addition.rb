@@ -1,11 +1,11 @@
 module TimeAddition
   REGULAR_EXPRESSION = /^(([0-1]?\d)|(2?[0-3]))(:([0-5]\d)){2}$/
   
-  def TimeAddition.is_valid?(input)
+  def is_valid?(input)
     REGULAR_EXPRESSION =~ input
   end
 
-  def TimeAddition.add_time(time_inputs_string)
+  def add_time(time_inputs_string)
     time_inputs = time_inputs_string.split(/[\s,\.]+/)
     if (time_inputs.all? { |time| is_valid?(time) })
       modified_first = Time.parse(time_inputs[0])
@@ -19,7 +19,7 @@ module TimeAddition
     end
   end
 
-  def TimeAddition.output_result(time_sum, modified_first)
+  def output_result(time_sum, modified_first)
     time_hour = time_sum.hour.to_s.length > 1 ? time_sum.hour : "0#{time_sum.hour.to_i}"
     time_minute = time_sum.min.to_s.length > 1 ? time_sum.min : "0#{time_sum.min.to_i}"
     time_second = time_sum.sec.to_s.length > 1 ? time_sum.sec : "0#{time_sum.sec.to_i}"
@@ -32,7 +32,7 @@ module TimeAddition
     end
   end
 
-  def TimeAddition.repeat_input
+  def repeat_input
     puts "Enter your time inputs"
     add_time(gets.chomp)
   end

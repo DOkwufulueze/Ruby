@@ -1,6 +1,7 @@
 require "time"
 require_relative "../lib/time_addition.rb"
+include TimeAddition
 
 puts "Enter your time inputs"
-puts TimeAddition.add_time(gets.chomp)
+puts add_time(gets.chomp)
 
