@@ -1,7 +1,8 @@
 module TimeAddition
+  REGULAR_EXPRESSION = /^(([0-1]?\d)|(2?[0-3]))(:([0-5]\d)){2}$/
+  
   def TimeAddition.is_valid?(input)
-    regular_expression = /^(([0-1]?\d)|(2?[0-3]))(:([0-5]\d)){2}$/
-    regular_expression =~ input
+    REGULAR_EXPRESSION =~ input
   end
 
   def TimeAddition.add_time(time_inputs_string)
